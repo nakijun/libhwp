@@ -182,8 +182,6 @@ static void parse_file_header (HwpHWP5File *file)
   file->is_sign_spare          = prop & (1 <<  9);
   file->is_certificate_drm     = prop & (1 << 10);
   file->is_ccl                 = prop & (1 << 11);
-
-  g_free ((guint8 *) buf);
 }
 
 static void make_stream (HwpHWP5File *file, GError **error)

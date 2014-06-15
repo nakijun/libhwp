@@ -234,7 +234,11 @@ static void make_stream (HwpHWP5File *file, GError **error)
     goto FAIL;
   }
 
-  input = gsf_infile_child_by_name (ole, "BodyText");
+/* TODO */
+/*  if (!file->is_distribute) */
+    input = gsf_infile_child_by_name (ole, "BodyText");
+/*   else
+    input = gsf_infile_child_by_name (ole, "ViewText"); */
 
   if (input)
   {
@@ -256,6 +260,8 @@ static void make_stream (HwpHWP5File *file, GError **error)
         return;
       }
 
+      /* TODO */
+      /* if (file->is_compress && !file->is_distribute) */
       if (file->is_compress)
       {
         GsfInput *tmp = g_object_new (GSF_INPUT_GZIP_TYPE,
@@ -277,8 +283,6 @@ static void make_stream (HwpHWP5File *file, GError **error)
   {
     goto FAIL;
   }
-
-  /* TODO viewtext */
 
   input = gsf_infile_child_by_name (ole, "\005HwpSummaryInformation");
   if (input && gsf_infile_num_children (GSF_INFILE (input)) == -1)
